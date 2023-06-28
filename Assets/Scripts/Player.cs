@@ -13,9 +13,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float leftRightMovementBorder = 9f;
     [Header("Laser")]
     [SerializeField] private GameObject laserPrefab;
+    [SerializeField] private GameObject tripleShotPrefab;
     [SerializeField] private float cooldownTime = 0.5f;
     [SerializeField] private Vector3 spawnOffset = Vector3.zero;
 
+    [SerializeField]  private bool isTripleShotActive = false;
 
     private float nextFire = 0.0f;
 
@@ -54,7 +56,17 @@ public class Player : MonoBehaviour
     private void FireLaser()
     {
         nextFire = Time.time + cooldownTime;
-        Instantiate(laserPrefab, transform.position + spawnOffset, Quaternion.identity);
+        GameObject typeOfFirePrefab;
+        if ( isTripleShotActive)
+        {
+            typeOfFirePrefab = tripleShotPrefab;
+        }
+        else
+        {
+            typeOfFirePrefab = laserPrefab;
+        }
+
+        Instantiate(typeOfFirePrefab, transform.position + spawnOffset, Quaternion.identity);
     }
 
     private void CalculateMovement()
@@ -74,4 +86,18 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(-leftRightMovementBorder * sign, transform.position.y, 0);
         }
     }
+
+    public void onPowerupCollected( float durationTime)
+    {
+        isTripleShotActive = true;
+        StartCoroutine(PowerupDownRoutine(durationTime));
+        
+    }
+
+    private IEnumerator PowerupDownRoutine(float durationTime)
+    {
+        yield return new WaitForSeconds(durationTime);
+        isTripleShotActive = false;
+    }
+
 }

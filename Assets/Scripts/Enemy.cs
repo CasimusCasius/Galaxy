@@ -9,11 +9,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] float horizontalAbsBorder = 11.3f;
     [SerializeField] float respawnYPos = 5.8f;
 
-    private void Start()
-    {
-        SpawnOnTheTop();
-    }
-
     void Update()
     {
         transform.Translate(Vector3.down * movementSpeed * Time.deltaTime);
