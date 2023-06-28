@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
         float verticalClampedPosition = Mathf.Clamp(transform.position.y, bottomMovementBorder, topMovementBorder);
         transform.position = new Vector3(transform.position.x, verticalClampedPosition, 0);
 
-        if (transform.position.x > leftRightMovementBorder || transform.position.x > leftRightMovementBorder)
+        if (transform.position.x > leftRightMovementBorder || transform.position.x <-leftRightMovementBorder)
         {
             float sign = Mathf.Sign(transform.position.x);
             transform.position = new Vector3(-leftRightMovementBorder * sign, transform.position.y, 0);
