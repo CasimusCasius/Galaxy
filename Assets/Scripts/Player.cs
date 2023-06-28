@@ -43,6 +43,11 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
+        var enemySpawner = FindObjectOfType<SpawnManager>();
+        if (enemySpawner != null) 
+        {
+            enemySpawner.onPlayerDeath();
+        }
         Destroy(gameObject);
     }
 
@@ -69,6 +74,4 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(-leftRightMovementBorder * sign, transform.position.y, 0);
         }
     }
-
-    
 }

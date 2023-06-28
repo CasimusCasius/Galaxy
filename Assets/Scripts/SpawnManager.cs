@@ -8,6 +8,8 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private float timeToNextSpawn=5;
     [SerializeField] private Transform enemyContainer;
 
+    private bool stopSpawning = false;
+
     void Start()
     {
         StartCoroutine(SpawnEnemyRoutine());
@@ -15,11 +17,16 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnEnemyRoutine()
     {
-        while (true) 
+
+        while (!stopSpawning) 
         {
             Instantiate(enemyPrefab,enemyContainer);
             yield return new WaitForSeconds(timeToNextSpawn);
         }
     }
 
+    public void onPlayerDeath()
+    {
+        stopSpawning = true;
+    }
 }
