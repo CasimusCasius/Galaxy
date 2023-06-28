@@ -9,6 +9,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] float horizontalAbsBorder = 11.3f;
     [SerializeField] float respawnYPos = 5.8f;
 
+    private void Start()
+    {
+        SpawnOnTheTop();
+    }
 
     void Update()
     {
@@ -31,10 +35,9 @@ public class Enemy : MonoBehaviour
             Destroy(laser.gameObject);
             Destroy(gameObject);
         }
-        
     }
 
-    public void SpawnOnTheTop()
+    private void SpawnOnTheTop()
     {
         transform.position = new Vector3(Random.Range(-horizontalAbsBorder, horizontalAbsBorder), respawnYPos, 0);
     }

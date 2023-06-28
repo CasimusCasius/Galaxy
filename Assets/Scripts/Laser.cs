@@ -14,9 +14,4 @@ public class Laser : MonoBehaviour
         transform.Translate(Vector3.up * laserSpeed * Time.deltaTime);
         Destroy(gameObject, lifeTime);
     }
-
-
-    
-
-
 }
